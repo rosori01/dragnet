@@ -57,7 +57,7 @@ $ docker build -t dragnetAPI .
 2. Run the docker image as a container
 ```bash
 # creates runtime environment and executes entrypoint script in said environment 
-$ docker container run -it dragnet-1 /bin/bash -c "source /root/miniconda2/bin/activate /root/py && python my_script.py"
+$ docker container run -it dragnetAPI /bin/bash -c "source /root/miniconda2/bin/activate /root/py && python run.py"
 ```
 
 ```bash

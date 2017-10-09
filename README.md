@@ -59,9 +59,19 @@ $ docker build -t dragnetapi .
 docker container run -it -d -p 5000:5000 --name dragnetapi dragnetapi
 ```
 
-```bash
-$ cd dragnet
-$ sudo make install
-# these should now pass
-$ make test
-```
+### Interacting via [<i>Postman</i>](https://www.getpostman.com/)
+
+1. Set the message type to 'POST'
+
+2. Set the request url to 'http://0.0.0.0:5000'
+
+3. Within the 'Body' tab, select the 'form-data' option
+
+4. Add a key named 'webpage' and select the option 'File' from the drop down menu immediately to the right.
+
+5. In the value column, choose any '.html' file to send to the API
+
+6. Send
+
+[![Dragnet_API_Interaction_via_Postman](https://i.imgur.com/QyZdWop.png)]
+

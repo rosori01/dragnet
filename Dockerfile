@@ -51,10 +51,5 @@ ADD . /srv/app
 RUN export PATH=$HOME/miniconda2/bin:$PATH && \
     /bin/bash -c "source activate /root/py/ && pip install --upgrade pip && pip install 'Cython>=0.21.1' && pip install nose && pip install coverage && pip install lxml && pip install scikit-learn==0.18.1 && pip install numpy && pip install scipy && pip install mozsci && pip install --upgrade flask && make install"
 
+#activate environment, run flask app
 CMD /bin/bash -c "source /root/miniconda2/bin/activate /root/py && export FLASK_APP=run.py && flask run --host=0.0.0.0 -p 5000"
-
-# private only
-# EXPOSE 5000
-
-# HOW TO RUN
-#docker container run -it dragnet-1 /bin/bash -c "source /root/miniconda2/bin/activate /root/py && python my_script.py"

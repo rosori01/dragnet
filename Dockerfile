@@ -1,11 +1,6 @@
 FROM ubuntu
 MAINTAINER Raphael Osorio<raphaelaosorio@gmail.com>
 
-# Create the directory where we will copy the application code
-RUN mkdir /srv/app
-# ... and declare it as the default working directory
-WORKDIR /srv/app
-
 # Install required software:
 RUN apt-get update
 RUN apt-get -y install --upgrade python python-pip python-dev build-essential python-setuptools build-essential  && \
@@ -36,10 +31,17 @@ RUN pip install "Cython>=0.21.1" && \
     pip install coverage && \
     pip install Cython>=0.21.1 && \
     pip install lxml && \
-    pip install scikit-learn>=0.15.2 && \
+    pip install scikit-learn==0.18.1 && \
     pip install numpy && \
     pip install scipy && \
-    pip install mozsci
+    pip install mozsci && \
+    pip install --upgrade flask
+
+# Create the directory where we will copy the application code
+RUN mkdir /srv/app
+
+# ... and declare it as the default working directory
+WORKDIR /srv/app
 
 # Add the application
 ADD . /srv/app
@@ -47,7 +49,12 @@ ADD . /srv/app
 
 # activate environment, install python dependencies, and run make install
 RUN export PATH=$HOME/miniconda2/bin:$PATH && \
-    /bin/bash -c "source activate /root/py/ && pip install 'Cython>=0.21.1' && pip install nose && pip install coverage && pip install lxml && pip install scikit-learn==0.18.1 && pip install numpy && pip install scipy && pip install mozsci && make install"
+    /bin/bash -c "source activate /root/py/ && pip install --upgrade pip && pip install 'Cython>=0.21.1' && pip install nose && pip install coverage && pip install lxml && pip install scikit-learn==0.18.1 && pip install numpy && pip install scipy && pip install mozsci && pip install --upgrade flask && make install"
+
+CMD /bin/bash -c "source /root/miniconda2/bin/activate /root/py && export FLASK_APP=run.py && flask run --host=0.0.0.0 -p 5000"
+
+# private only
+# EXPOSE 5000
 
 # HOW TO RUN
 #docker container run -it dragnet-1 /bin/bash -c "source /root/miniconda2/bin/activate /root/py && python my_script.py"

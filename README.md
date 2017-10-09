@@ -50,14 +50,14 @@ for HTML parsing.
 
 ### Installing with Docker:
 
-1. Build the docker image 
-``` 
-$ docker build -t dragnetAPI .
+1. Build the docker image
+```
+$ docker build -t dragnetapi .
 ```
 2. Run the docker image as a container
 ```bash
-# creates runtime environment and executes entrypoint script in said environment 
-$ docker container run -it dragnet-1 /bin/bash -c "source /root/miniconda2/bin/activate /root/py && python my_script.py"
+# creates runtime environment and executes entrypoint script in said environment
+docker container run -it -d -p 5000:5000 --name dragnetapi dragnetapi
 ```
 
 ```bash
